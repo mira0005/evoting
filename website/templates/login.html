@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>{{ app.app_name }} - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Website voting/pemungutan suara berbasis web." name="description" />
+    <meta content="Besutodio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/media/{{ app.app_logo }}">
+
+    <!-- App css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="authentication-bg">
+
+    <!-- Pre-loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Preloader-->
+
+    <div class="account-pages my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-md-12 p-5">
+                                    <div class="mx-auto text-center mb-5">
+                                        <a href="/">
+                                            <img src="/media/{{ app.app_logo }}/" alt="" height="24" />
+                                            <h3 class="d-inline align-middle ml-1 text-logo">{{ app.app_name }}</h3>
+                                        </a>
+                                    </div>
+
+                                    <h6 class="h5 mb-0 mt-4 text-center">Selamat Datang!</h6>
+                                    <p class="text-muted mt-1 mb-4 text-center">Masukkan username dan password anda.</p>
+
+                                    <form id="formLogin" class="authentication-form needs-validation" novalidate>
+                                        <div class="form-group">
+                                            <label class="form-control-label">Username</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-dual" data-feather="user"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" name="username" autofocus id="email"
+                                                    placeholder="Masukkan username" required>
+                                                <div class="invalid-feedback">
+                                                    Masukkan username.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mt-4">
+                                            <label class="form-control-label">Password</label>
+                                            <div class="input-group input-group-merge">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="icon-dual" data-feather="lock"></i>
+                                                    </span>
+                                                </div>
+                                                <input type="password" class="form-control" name="password" id="password"
+                                                    placeholder="Masukkan password" required>
+                                                <div class="invalid-feedback">
+                                                    Masukkan password.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-4">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="checkbox-signin"
+                                                    checked>
+                                                <label class="custom-control-label" for="checkbox-signin">Ingat saya</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-0 text-center">
+                                            <button class="btn btn-primary btn-block" type="submit">Login</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+    <!-- Vendor js -->
+    <script src="{% static 'assets/js/vendor.min.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- App js -->
+    <script src="{% static 'assets/js/app.min.js' %}"></script>
+
+    <!-- pages js -->
+    <script>const token = '{{ csrf_token }}';</script>
+    <script src="{% static 'assets/js/pages/login.min.js' %}"></script>    
+
+</body>
+
+</html>

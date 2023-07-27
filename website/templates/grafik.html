@@ -1,0 +1,51 @@
+{% extends 'layout/front.html' %}
+{% load static %}
+
+{% block css %}
+
+{% endblock css %}
+
+{% block title %}
+{{ app.app_name }} - Grafik
+{% endblock title %}
+
+{% block content %}
+<section id="voting">
+    <div class="container">
+        <div class="d-flex header align-items-center bg-white rounded-xl pt-3 pl-3 pr-3 pb-1">
+            <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_yMpiqXia1k.json" background="transparent"
+                speed="1" style="width: 200px;" loop autoplay></lottie-player>
+            <div class="ml-3">
+                <h2 class="text-ungu font-weight-bold title">Lihat perolehan suara jagoanmu votters!</h2>
+                <p class="text-muted description">Pantau terus perolehan suara jagoanmu. Jangan lupa berikan dukunganmu juga yaa..</p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-sm-6 mb-sm-0 mb-4">
+                <div class="bg-white rounded-xl p-3">
+                    <div id="grafikVoting" class="apex-charts" dir="ltr"></div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="bg-white rounded-xl p-3">
+                    <span class="text-ungu d-flex fs-xs">
+                        <i class="uil uil-info-circle mr-2"></i>
+                        <span>Grafik ini tidak realtime. Jadi, perlu refresh untuk memperbaharuinya.</span>
+                    </span>
+                    <button class="btn btn-ungu rounded-pill mt-3" id="btn-refresh">
+                        <span>
+                            <i class="uil uil-refresh mr-2"></i>
+                        </span>
+                        Refresh
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/libs/apexcharts/apexcharts.min.js' %}"></script>
+<script src="{% static 'assets/js/pages/grafik.min.js' %}"></script>
+{% endblock script %}

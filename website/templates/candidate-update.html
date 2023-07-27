@@ -1,0 +1,91 @@
+{% extends 'layout/main.html' %}
+{% load static %}
+
+{% block plugin %}
+<link href="{% static 'assets/libs/summernote/summernote-bs4.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/libs/smartwizard/smart_wizard_theme_circles.min.css' %}" type="text/css" />
+<link href="{% static 'assets/libs/select2/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" type="text/css" />
+{% endblock plugin %}
+
+{% block title %}
+Detail Kandidat
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row page-title align-items-center">
+        <div class="col-sm-12 d-flex justify-content-between align-items-center">
+            <h4 class="mb-1 mt-0">Detail Kandidat</h4>
+            <button class="btn btn-danger" id="btn-hapus" data-code="{{ c.code }}" data="{{ c.name }}"><i class="uil uil-trash mr-2"></i>Hapus</button>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <form id="formUbahData" class="authentication-form needs-validation" novalidate data-code="{{ c.code }}">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group text-center">
+                                    <div class="position-relative d-inline-block">
+                                        <img src="/media/{{ c.photo }}" alt="logo app" width="100%" id="logoApp" class="rounded">
+                                        <label for="logo" class="btn btn-success btn-sm mb-0" style="cursor: pointer; bottom: 0; right: 0; position: absolute">
+                                            <span><i class="uil-image-edit"></i></span>
+                                            <input type="file" hidden name="foto" id="logo" accept="image/png, image/jpeg" required>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="sw-circles-userName">Nama</label>
+                                    <input type="text" class="form-control" id="sw-circles-userName" name="name" placeholder="Masukkan nama kandidat..." required value="{{ c.name }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sw-circles-password">Urutan</label>
+                                    <input type="number" id="sw-circles-password" class="form-control" name="order" placeholder="Masukkan urutan kandidat..." required value="{{ c.order }}">
+                                </div>
+                                
+                                <div class="form-group mb-0">
+                                    <label for="sw-circles-confirm">Divisi</label>
+                                    <select name="division" id="sw-circles-confirm" class="form-control" data-plugin="customselect" required>
+                                        {% for d in division %}
+                                            <option {% ifequal d.id c.division.id %}selected{% endifequal %} value="{{ d.id }}">{{ d.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Visi</label>
+                            <textarea class="summernote-editor" name="vision" required>
+                                {{ c.vision }}
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Misi</label>
+                            <textarea class="summernote-editor" name="mission" required>
+                                {{ c.mission }}
+                            </textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right btn-simpan">
+                            <span>Simpan</span>
+                            <span class="spinner-border spinner-border-sm ml-2 d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/libs/summernote/summernote-bs4.min.js' %}"></script>
+<script src="{% static 'assets/libs/select2/select2.min.js' %}"></script>
+<script src="{% static 'assets/libs/smartwizard/jquery.smartWizard.min.js' %}"></script>
+<script src="{% static 'assets/js/pages/candidate-update.min.js' %}"></script>
+{% endblock script %}

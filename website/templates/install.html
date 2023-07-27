@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Installing App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Website voting/pemungutan suara berbasis web." name="description" />
+    <meta content="Besutodio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="authentication-bg">
+
+    <!-- Pre-loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="circle1"></div>
+                <div class="circle2"></div>
+                <div class="circle3"></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Preloader-->
+
+    <div class="account-pages my-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-8">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-md-12 p-5">
+                                    <div class="mb-5">
+                                        <h3 class="text-capitalize text-center font-weight-bold">Installing App</h3>
+                                    </div>
+
+                                    <h6 class="h5 mb-0 mt-4 text-center">Selamat Datang!</h6>
+                                    <p class="text-muted mt-1 mb-4 text-center">Masukkan detail aplikasi untuk installasi.</p>
+
+                                    <form class="authentication-form needs-validation" id="formInstall" novalidate>
+                                        <div class="form-group text-center">
+                                            <div class="position-relative d-inline-block">
+                                                <img src="{% static 'assets/images/template-logo.jpg' %}" alt="logo app" width="100" id="logoApp" class="rounded">
+                                                <label for="logo" class="btn btn-success btn-sm mb-0" style="cursor: pointer; bottom: 0; right: 0; position: absolute">
+                                                    <span><i class="uil-image-edit"></i></span>
+                                                    <input type="file" hidden name="logo" id="logo" accept="image/png, image/jpeg" required>
+                                                </label>
+                                                <div class="invalid-tooltip">
+                                                    Masukkan logo aplikasi.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nama Aplikasi</label>
+                                                    <input type="text" class="form-control" name="name" placeholder="E-Voting" required>
+                                                    <div class="invalid-feedback">
+                                                        Masukkan nama aplikasi.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Organisasi</label>
+                                                    <input type="text" class="form-control" name="org" placeholder="SMK Mars" required>
+                                                    <div class="invalid-feedback">
+                                                        Masukkan nama organisasi.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Nama Admin</label>
+                                                    <input type="text" class="form-control" name="adminName" placeholder="Jhon Doe" required>
+                                                    <div class="invalid-feedback">
+                                                        Masukkan nama admin.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" name="username" placeholder="jhondoe" required>
+                                                    <div class="invalid-feedback">
+                                                        Masukkan username.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="password" class="form-control" name="password" placeholder="********" required>
+                                                    <div class="invalid-feedback">
+                                                        Masukkan password.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Konfirmasi Password</label>
+                                                    <input type="password" class="form-control" name="password2" placeholder="********" required>
+                                                    <div class="invalid-feedback">
+                                                        Masukkan konfirmasi password.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mb-0 text-center">
+                                            <button class="btn btn-primary btn-block" type="submit">Install</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div> <!-- end card-body -->
+                    </div>
+                    <!-- end card -->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+    <!-- end page -->
+
+    <!-- Vendor js -->
+    <script src="{% static 'assets/js/vendor.min.js' %}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- App js -->
+    <script src="{% static 'assets/js/app.min.js' %}"></script>
+
+    <!-- pages js -->
+    <script>const token = '{{ csrf_token }}';</script>
+    <script src="{% static 'assets/js/pages/install.min.js' %}"></script>
+
+</body>
+
+</html>

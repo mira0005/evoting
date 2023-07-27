@@ -1,0 +1,141 @@
+{% extends 'layout/main.html' %}
+{% load static %}
+
+{% block plugin %}
+<link href="{% static 'assets/libs/summernote/summernote-bs4.css' %}" rel="stylesheet" />
+<link rel="stylesheet" href="{% static 'assets/libs/smartwizard/smart_wizard_theme_circles.min.css' %}" type="text/css" />
+<link href="{% static 'assets/libs/select2/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/css/candidate.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'assets/css/custom.css' %}" rel="stylesheet" type="text/css" />
+{% endblock plugin %}
+
+{% block title %}
+Data Kandidat
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row page-title align-items-center">
+        <div class="col-sm-12 d-flex justify-content-between align-items-center">
+            <h4 class="mb-1 mt-0">Data Kandidat</h4>
+            <button type="button" class="btn btn-primary" title="Tambah Data" data-target="#modalTambah" data-toggle="modal"><i class="uil uil-plus-circle"></i> Tambah Data</button>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <div class="row">
+                        {% for c in candidates %}
+                        <div class="col-md-2 mb-3 col-6">
+                            <div class="position-relative candidate-card rounded" data-code="{{ c.code }}">
+                                <img class="card-img-top img-fluid rounded" src="/media/{{ c.photo }}" alt="Candidate photos">
+                                <div class="overlay rounded">
+                                    <div class="bg-primary rounded order text-white"><span>{{ c.order }}</span></div>
+                                    <h1 class="text-white text-uppercase">{{ c.name }}<br>{{ c.division }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-md-12">
+                            <div class="alert alert-danger"><i class="uil uil-users-alt mr-2"></i>Tidak ada data kandidat!</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tambah Data -->
+<div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-labelledby="myCenterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formTambahData" class="authentication-form needs-validation" novalidate>
+                    <div id="smartwizard-circles">
+                        <ul>
+                            <li><a href="#sw-circles-step-1"><i class="uil uil-user"></i><small class="d-block">Info</small></a></li>
+                            <li><a href="#sw-circles-step-2"><i class="uil uil-file-alt"></i><small class="d-block">Visi</small></a></li>
+                            <li><a href="#sw-circles-step-3"><i class="uil uil-file-alt"></i><small class="d-block">Misi</small></a></li>
+                        </ul>
+                        
+                        <div>
+                            <div id="sw-circles-step-1">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group text-center">
+                                            <div class="position-relative d-inline-block">
+                                                <img src="{% static 'assets/images/template-foto.jpg' %}" alt="logo app" width="100" id="logoApp" class="rounded">
+                                                <label for="logo" class="btn btn-success btn-sm mb-0" style="cursor: pointer; bottom: 0; right: 0; position: absolute">
+                                                    <span><i class="uil-image-edit"></i></span>
+                                                    <input type="file" hidden name="foto" id="logo" accept="image/png, image/jpeg" required>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sw-circles-userName">Nama</label>
+                                            <input type="text" class="form-control" id="sw-circles-userName" name="name" placeholder="Masukkan nama kandidat..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sw-circles-password">Urutan</label>
+                                            <input type="number" id="sw-circles-password" class="form-control" name="order" placeholder="Masukkan urutan kandidat..." required>
+                                        </div>
+                                        
+                                        <div class="form-group mb-0">
+                                            <label for="sw-circles-confirm">Kelas</label>
+                                            <select name="division" id="sw-circles-confirm" class="form-control" data-plugin="customselect" required>
+                                                {% for d in division %}
+                                                    <option value="{{ d.id }}">{{ d.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div> <!-- end row -->
+                            </div>
+                            <div id="sw-circles-step-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <textarea class="summernote-editor" name="vision" required>
+                                            Masukkan visi kandidat...
+                                        </textarea>
+                                    </div> <!-- end col -->
+                                </div> <!-- end row -->
+                            </div>
+                            <div id="sw-circles-step-3">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <textarea class="summernote-editor" name="mission" required>
+                                            Masukkan misi kandidat...
+                                        </textarea>
+                                        <button type="submit" class="btn btn-primary float-right btn-simpan">
+                                            <span>Simpan</span>
+                                            <span class="spinner-border spinner-border-sm ml-2 d-none" role="status" aria-hidden="true"></span>
+                                        </button>
+                                    </div> <!-- end col -->
+                                </div> <!-- end row -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/libs/summernote/summernote-bs4.min.js' %}"></script>
+<script src="{% static 'assets/libs/select2/select2.min.js' %}"></script>
+<script src="{% static 'assets/libs/smartwizard/jquery.smartWizard.min.js' %}"></script>
+<script src="{% static 'assets/js/pages/candidate.min.js' %}"></script>
+{% endblock script %}

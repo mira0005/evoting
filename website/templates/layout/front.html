@@ -1,0 +1,146 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Website voting/pemungutan suara berbasis web." name="description" />
+    <meta content="Besutodio" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/media/{{ app.app_logo }}" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+
+    {% block css %}{% endblock css %}
+    
+    <title>{% block title %}{% endblock title %}</title>
+  </head>
+  <body class="bg-gradient-ungu" style="font-family: 'Poppins', sans-serif;">
+
+    <div class="container">
+      <div class="btn-group position-absolute btn-nav-custom d-none d-md-block">
+        <button type="button" class="btn btn-light rounded-pill text-ungu"
+            data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"><i class="uil uil-bars mr-2"></i>Menu</button>
+        {% with request.resolver_match.url_name as url_name %}
+        <div class="dropdown-menu shadow-custom rounded-xl pt-3 pb-3">
+            <a class="dropdown-item {% if url_name == 'home' %}active{% endif %}" href="{% url 'home' %}"><i class="uil uil-home-alt mr-2"></i>Home</a>
+            <a class="dropdown-item {% if url_name == 'voting' %}active{% endif %}" href="{% url 'voting' %}"><i class="uil uil-podium mr-2"></i>Voting</a>
+            <a class="dropdown-item {% if url_name == 'grafik' %}active{% endif %}" href="{% url 'grafik' %}"><i class="uil uil-chart-bar mr-2"></i>Grafik</a>
+            <a class="dropdown-item {% if url_name == 'akun' %}active{% endif %}" href="{% url 'akun' %}"><i class="uil uil-user-circle mr-2"></i>Akun</a>
+        </div>
+        {% endwith %}
+      </div>
+    </div>
+    
+    {% block content %}{% endblock content %}
+
+    <div id="floating-nav" class="d-block d-md-none">
+      {% with request.resolver_match.url_name as url_name %}
+      <div class="row bg-white">
+          <a href="{% url 'home' %}" class="col-3 text-decoration-none pt-2 pb-2 floating-nav-item text-ungu {% if url_name == 'home' %}active{% endif %}">
+              <div class="d-flex flex-column text-center">
+                  <i class="uil uil-home-alt icon"></i>
+                  <span class="text">Home</span>
+              </div>
+          </a>
+          <a href="{% url 'voting' %}" class="col-3 text-decoration-none pt-2 pb-2 floating-nav-item text-ungu {% if url_name == 'voting' %}active{% endif %}">
+            <div class="d-flex flex-column text-center">
+                <i class="uil uil-podium icon"></i>
+                <span class="text">Voting</span>
+            </div>
+        </a>
+        <a href="{% url 'grafik' %}" class="col-3 text-decoration-none pt-2 pb-2 floating-nav-item text-ungu {% if url_name == 'grafik' %}active{% endif %}">
+          <div class="d-flex flex-column text-center">
+              <i class="uil uil-chart-bar icon"></i>
+              <span class="text">Grafik</span>
+          </div>
+        </a>
+        <a href="{% url 'akun' %}" class="col-3 text-decoration-none pt-2 pb-2 floating-nav-item text-ungu {% if url_name == 'akun' %}active{% endif %}">
+          <div class="d-flex flex-column text-center">
+              <i class="uil uil-user-circle icon"></i>
+              <span class="text">Akun</span>
+          </div>
+        </a>
+      </div>
+      {% endwith %}
+    </div>
+
+    <!-- Modal Login -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="emodalLogin" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-xl p-4">
+          <div class="modal-body">
+            <button type="button" class="position-absolute btn" style="top: 0; right: 0" data-dismiss="modal" aria-label="Close">
+              <i class="uil uil-times-circle text-ungu"></i>
+            </button>
+            <h4 class="text-ungu font-weight-bold text-center">Login</h4>
+            <p class="mb-4 text-center">Masuk untuk dapat melakukan voting!</p>
+            <form id="formLogin">
+              <div class="form-group">
+                <label>Kode</label>
+                <input type="number" class="form-control rounded-pill" name="kode" placeholder="********" autofocus autocomplete="off">
+              </div>
+              <div class="form-group">
+                <label>Konfirmasi Kode</label>
+                <input type="number" class="form-control rounded-pill" name="kode2" placeholder="********" autocomplete="off">
+                <small class="form-text text-muted">*Masukkan kode akses lagi.</small>
+              </div>
+              <button type="submit" class="btn btn-ungu btn-block rounded-pill">
+                <span>
+                  <i class="uil uil-sign-out-alt mr-2"></i>
+                </span>
+                Login
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    {% if app.check_date != "selesai" %}
+    <div class="dropdown" style="z-index: 1; position: fixed; top:40%; right: 2px; transform:translateY(-40%)">
+      <button class="btn btn-light text-ungu rounded-pill shadow" type="button" data-toggle="dropdown" aria-expanded="false">
+        <i class="uil uil-clock-seven"></i>
+      </button>
+      <div class="dropdown-menu rounded-xl shadow border-0">
+        <div id="timecount" class="p-3">
+          <h6 class="text-center">
+            {% if app.check_date == "belum" %}
+              Mulai dalam
+            {% elif app.check_date == "mulai" %}
+              Berakhir dalam
+            {% endif %}
+          </h6>
+          <div class="d-flex">
+            <span class="bg-gradient-ungu text-white p-2 rounded mr-2" id="day">00</span>
+            <span class="bg-gradient-ungu text-white p-2 rounded mr-2" id="hour">00</span>
+            <span class="bg-gradient-ungu text-white p-2 rounded mr-2" id="minute">00</span>
+            <span class="bg-gradient-ungu text-white p-2 rounded" id="second">00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>let token = '{{ csrf_token }}'; let tglMulai = '{{ app.start_at|date:"Y-m-d H:i:s" }}'; let tglSelesai = '{{ app.end_at|date:"Y-m-d H:i:s" }}';</script>
+    <script src="{% static 'assets/js/pages/front.min.js' %}"></script>
+    {% block script %}{% endblock script %}
+  </body>
+</html>

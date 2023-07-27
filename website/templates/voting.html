@@ -1,0 +1,167 @@
+{% extends 'layout/front.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="{% static 'assets/css/candidate.css' %}" />
+{% endblock css %}
+
+{% block title %}
+{{ app.app_name }} - Voting
+{% endblock title %}
+
+{% block content %}
+<section id="voting">
+    <div class="container">
+        <div class="d-flex header align-items-center bg-white rounded-xl pt-3 pl-3 pr-3 pb-1">
+            <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_dwmb4mrt.json" background="transparent"
+                speed="1" style="width: 200px;" loop autoplay></lottie-player>
+            <div class="ml-3">
+                <h2 class="text-ungu font-weight-bold title">Berikan suara terbaik anda!</h2>
+                <p class="text-muted description">Geser card kandidat untuk melihat kandidat lainnya. Klik card untuk
+                    melihat detail kandidat.</p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            {% if request.user.is_authenticated %}
+            <div class="col-12 mb-4">
+                <div class="bg-white rounded-xl p-3 fs-xs">
+                    <b class="text-ungu">{{ voter.name }}</b> pastikan untuk memilih dengan teliti ya, jangan sampai keputusamu akan kau sesali nantinya..
+                </div>
+            </div>
+            {% endif %}
+            <div class="col-12">
+                <div class="bg-white rounded-xl p-3">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            {% for c in candidates %}
+                            <div class="swiper-slide">
+                                <div class="position-relative candidate-card rounded-xl right-bar-toggle border"
+                                    code="{{ c.code }}" name="{{ c.name }}" foto="/media/{{ c.photo }}"
+                                    order="{{ c.order }}" vision="{{ c.vision }}" mission="{{ c.mission }}"
+                                    division="{{ c.division }}">
+                                    <img class="img-fluid rounded-xl" src="/media/{{ c.photo }}" alt="Candidate photos">
+                                    <div class="overlay rounded-xl">
+                                        <div class="bg-white rounded-xl order text-ungu"><span>{{ c.order }}</span>
+                                        </div>
+                                        <h1 class="text-white text-uppercase font-weight-bold">{{ c.name }}<br>{{c.division }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="right-bar" id="bottom-bar">
+    <div class="rightbar-title">
+        <h6 class="m-0 text-ungu">Detail Kandidat</h6>
+        <a href="javascript:void(0);" class="right-bar-toggle text-ungu">
+            <i class="uil uil-times-circle"></i>
+        </a>
+    </div>
+
+    <div class="slimscroll-menu">
+        <div class="row ml-0 mr-0 mb-3">
+            <div class="col-5 pl-0">
+                <img src="" alt="foto-kandidat" width="100%" class="rounded-xl" id="foto">
+            </div>
+            <div class="col-7 pr-0">
+                <div class="mb-3">
+                    <h6 class="text-ungu mb-0">Nama</h6>
+                    <p class="text-muted fs-xs" id="nama"></p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="text-ungu mb-0">Kelas</h6>
+                    <p class="text-muted fs-xs" id="divisi"></p>
+                </div>
+                <div class="mb-3">
+                    <h6 class="text-ungu mb-0">Urutan</h6>
+                    <p class="text-muted fs-xs">Ke-<span id="order"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <h6 class="text-ungu mb-0">Visi</h6>
+            <div class="text-muted fs-xs" id="visi"></div>
+        </div>
+        <div class="mb-3">
+            <h6 class="text-ungu mb-0">Misi</h6>
+            <div class="text-muted fs-xs" id="misi"></div>
+        </div>
+    </div>
+    <div class="bg-white p-3 w-100 position-absolute" style="bottom: 0; left: 0; right: 0">
+        {% if request.user.is_authenticated %}
+        <button type="button" class="btn btn-ungu btn-block rounded-pill btn-vote" data-code="" data-name="">
+            <span>
+                <i class="uil uil-thumbs-up mr-2"></i>
+            </span>
+            Vote!
+        </button>
+        {% else %}
+        <button type="button" class="btn btn-ungu btn-block rounded-pill btn-login" data-toggle="modal"
+            data-target="#modalLogin"><i class="uil uil-sign-out-alt mr-2"></i>Login</button>
+        {% endif %}
+    </div>
+</div>
+<div class="rightbar-overlay"></div>
+
+<div class="modal fade" id="modalCandidate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content rounded-xl">
+            <button type="button" class="position-absolute btn" style="top: 1rem; right: 2rem; z-index: 2"
+                data-dismiss="modal" aria-label="Close"><i class="uil uil-times-circle text-ungu"></i></button>
+            <div class="modal-body p-4">
+                <div class="row mb-3">
+                    <div class="col-3">
+                        <img src="" alt="foto-kandidat" width="100%" class="rounded-xl" id="foto">
+                    </div>
+                    <div class="col-9">
+                        <div class="mb-3">
+                            <h6 class="text-ungu mb-0">Nama</h6>
+                            <h6 class="text-muted" id="nama"></h6>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-ungu mb-0">Kelas</h6>
+                            <h6 class="text-muted" id="divisi"></h6>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="text-ungu mb-0">Urutan</h6>
+                            <h6 class="text-muted">Ke-<span id="order"></span></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <h6 class="text-ungu mb-0">Visi</h6>
+                    <div class="text-muted" id="visi"></div>
+                </div>
+                <div class="mb-2">
+                    <h6 class="text-ungu mb-0">Misi</h6>
+                    <div class="text-muted" id="misi"></div>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0">
+                {% if request.user.is_authenticated %}
+                <button type="button" class="btn btn-ungu btn-block rounded-pill btn-vote" data-code="" data-name="">
+                    <span>
+                        <i class="uil uil-thumbs-up mr-2"></i>
+                    </span>
+                    Vote!
+                </button>
+                {% else %}
+                <button type="button" class="btn btn-ungu btn-block rounded-pill btn-login" data-toggle="modal"
+                    data-target="#modalLogin"><i class="uil uil-sign-out-alt mr-2"></i>Login</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+<script src="{% static 'assets/js/pages/voting.min.js' %}"></script>
+{% endblock script %}

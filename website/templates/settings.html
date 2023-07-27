@@ -1,0 +1,83 @@
+{% extends 'layout/main.html' %}
+{% load static %}
+
+{% block title %}
+Pengaturan
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row page-title align-items-center">
+        <div class="col-sm-12">
+            <h4 class="mb-1 mt-0">Pengaturan</h4>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <form id="formSettings" class="authentication-form needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group text-center">
+                                    <div class="position-relative d-inline-block">
+                                        <img src="/media/{{ app.app_logo }}" alt="logo app" width="100%" id="logoApp" class="rounded">
+                                        <label for="logo" class="btn btn-success btn-sm mb-0" style="cursor: pointer; bottom: 0; right: 0; position: absolute">
+                                            <span><i class="uil-image-edit"></i></span>
+                                            <input type="file" hidden name="foto" id="logo" accept="image/png, image/jpeg" required>
+                                        </label>
+                                        <div class="invalid-tooltip">
+                                            Masukkan logo aplikasi.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label>Nama Aplikasi</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Masukkan nama aplikasi..." required value="{{ app.app_name }}">
+                                    <div class="invalid-feedback">
+                                        Masukkan nama aplikasi.
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Organisasi</label>
+                                    <input type="text" class="form-control" name="org" placeholder="Masukkan organisasi..." required value="{{ app.organization }}">
+                                    <div class="invalid-feedback">
+                                        Masukkan nama organisasi.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info"><i class="uil uil-info-circle mr-2"></i>Di bawah adalah pengaturan untuk jadwal mulai dan akhir proses voting.</div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tanggal Mulai</label>
+                                    <input type="datetime-local" class="form-control" name="start" value="{{ app.start_at|date:'Y-m-d H:i' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tanggal Berakhir</label>
+                                    <input type="datetime-local" class="form-control" name="end" value="{{ app.end_at|date:'Y-m-d H:i' }}">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right btn-simpan">
+                            <span>Simpan</span>
+                            <span class="spinner-border spinner-border-sm ml-2 d-none" role="status" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/js/pages/settings.min.js' %}"></script>
+{% endblock script %}

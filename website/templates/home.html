@@ -1,0 +1,37 @@
+{% extends 'layout/front.html' %}
+{% load static %}
+
+{% block title %}
+    {{ app.app_name }} - A Voting App
+{% endblock title %}
+
+{% block content %}
+    <section id="homepage">
+        <div class="container">
+            <div class="row align-items-center row-core">
+                <div class="col-md-6 order-1 order-md-0">
+                    <img src="/media/{{ app.app_logo }}" alt="logo-app" width="60" class="mb-3">
+                    <h4 class="welcome text-white font-weight-bold">Hai {{ voter }}! Selamat datang di</h4>
+                    <h1 class="font-weight-bold title">{{ app.app_name }} - {{ app.organization }}</h1>
+                    <p class="text-white description">Silahkan berikan suara terbaik untuk kandidat jagoan anda yaa. Jangan lupa pilih dengan sepenuh hati agar tidak menyesalinya nanti.</p>
+                    <div class="d-flex justify-content-center justify-content-md-start">
+                        <a href="{% url 'voting' %}" class="btn btn-light text-ungu rounded-pill pl-3 pr-3"><i class="uil uil-podium mr-2"></i>Vote Sekarang</a>
+                        {% if not request.user.is_authenticated %}
+                            <button class="btn btn-light text-ungu rounded-pill pl-3 pr-3 ml-2" data-toggle="modal" data-target="#modalLogin">Login</button>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-5 offset-md-1 position-relative col-illustration">
+                    <div class="position-absolute bg-white pattern pattern-left pt-2">
+                        <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_fqmfqbvk.json" class="illustration" background="transparent" speed="1" style="width: 100px;" loop autoplay></lottie-player>
+                    </div>
+                    <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_uRCdqjTRoO.json" background="transparent" speed="1" style="width: 100%;" loop autoplay></lottie-player>
+                    <div class="position-absolute bg-white pattern pattern-right">
+                        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_8udmnhsx.json" class="illustration" background="transparent" speed="1" style="width: 100px;" loop autoplay></lottie-player>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}
+    

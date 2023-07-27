@@ -1,0 +1,39 @@
+.candidate-card {
+    transition: .3s ease-in-out;
+    cursor: pointer;
+}
+
+.candidate-card .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8),rgba(0, 0, 0, 0) 36%);
+    padding: 5px;
+}
+
+.candidate-card .overlay h1 {
+    font-size: 15px;
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    width: 100%;
+}
+
+.candidate-card .overlay .order {
+    position: absolute;
+    top: 7px;
+    right: 8px;
+    margin-top: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;;
+}

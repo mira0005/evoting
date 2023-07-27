@@ -1,0 +1,258 @@
+.sw-main {
+    border: none !important;
+}
+
+.sw-theme-circles>ul.step-anchor {
+    margin-top: 0 !important;
+    display: flex;
+    justify-content: center;
+}
+
+.sw-theme-circles>ul.step-anchor>li:first-child {
+    margin-left: 0;
+}
+
+.sw-main .sw-toolbar {
+    padding: 0 !important;
+}
+
+.sw-main .sw-toolbar .btn-group {
+    margin-right: 0 !important;
+    margin-top: 15px !important;
+}
+
+.tab-content {
+    padding: 0 !important;
+}
+
+.note-editor.note-frame .note-editing-area .note-editable {
+    border: 1px solid #e2e7f1 !important
+}
+
+/* Homepage */
+#homepage {
+  width: 100%;
+  height: 100vh;
+}
+
+#homepage .title {
+    font-size: 3rem;
+    background: -webkit-linear-gradient(right, #fdd846, #F47E52);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#homepage .description {
+    font-size: 1rem;
+}
+
+#homepage .row-core {
+    height: 100vh;
+}
+
+.bg-gradient-ungu {
+    background: linear-gradient(to right, #6C00FF, #781afc) !important;
+}
+
+.text-ungu {
+    color: #6C00FF !important;
+}
+
+.pattern {
+    z-index: 1;
+    box-shadow: 0 0 30px rgb(0 0 0 / 30%);
+    border-radius: 1rem;
+}
+
+.pattern.pattern-left {
+    top: 0;
+    right: 0;
+}
+
+.pattern.pattern-right {
+    bottom: 0;
+    left: 0;
+}
+
+#floating-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+#floating-nav .icon {
+    font-size: 1.4rem;
+    margin-bottom: -6px;
+}
+
+#floating-nav .text {
+    font-size: .6rem;
+}
+
+.shadow-custom {
+    box-shadow: 0 0 30px rgb(0 0 0 / 30%);
+}
+
+.rounded-xl {
+    border-radius: 1rem !important;
+}
+
+#floating-nav .floating-nav-item.active {
+    color: #F47E52 !important;
+}
+
+.btn-nav-custom {
+    top: 1rem;
+}
+
+.btn-nav-custom .dropdown-item {
+    color: #6C00FF !important;
+}
+
+.btn-nav-custom .dropdown-item.active {
+    color: white !important;
+    background-color: #F47E52 !important;
+}
+
+/* Voting */
+#voting, #akun {
+    margin-bottom: 5rem;
+}
+
+.header {
+    margin-top: 5rem;
+}
+
+#voting .swiper-wrapper .swiper-slide {
+    width: 300px;
+}
+
+/* Akun */
+#akun .header {
+    text-align: center;
+}
+
+#akun .header .user-icon {
+    display: flex;
+    justify-content: center ;
+}
+
+/* bottom Bar */
+.right-bar {
+  background-color: #fff;
+  -webkit-box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
+          box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
+  display: block;
+  position: fixed;
+  -webkit-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+  width: 100%;
+  height: 550px;
+  z-index: 100;
+  right: 0;
+  left: 0;
+  bottom: -550px;
+  padding: 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.right-bar .rightbar-title {
+    padding-bottom: 16px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right-bar .slimscroll-menu {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 6rem;
+}
+
+.right-bar .slimscroll-menu #visi p, .right-bar .slimscroll-menu #misi p {
+    margin-bottom: 0;
+}
+
+.rightbar-overlay {
+  background-color: rgba(52, 58, 64, 0.55);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+  z-index: 99;
+  -webkit-transition: all .2s ease-out;
+  transition: all .2s ease-out; }
+
+.right-bar-enabled .right-bar {
+  bottom: 0; 
+}
+
+.right-bar-enabled .rightbar-overlay {
+  display: block; 
+}
+
+.btn-ungu {
+    color: #fff;
+    background-color: #6C00FF;
+    border-color: #6C00FF;
+}
+
+.btn-ungu:hover {
+    color: #fff;
+    background-color: #5c00db;
+    border-color: #5c00db;
+}
+
+@media (max-width: 768px){
+    #homepage .row-core, #homepage {
+        height: auto;
+    } 
+    #homepage {
+        padding: 2rem 0 5.5rem;
+    }
+    #homepage .row-core {
+        text-align: center;
+    }
+    .col-illustration {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .col-illustration .illustration {
+        width: 70px !important;
+    }
+    .pattern.pattern-left {
+        right: 30px;
+    }
+    .pattern.pattern-right {
+        left: 30px;
+    }
+    #homepage .title {
+        font-size: 2rem;
+    }
+    #homepage .description {
+        font-size: .8rem;
+    }
+    #homepage .welcome {
+        font-size: 1rem;
+    }
+
+    .header {
+        margin-top: 1rem;
+    }
+    #voting .header .title {
+        font-size: 1.2rem;
+    }
+    #voting .header .description {
+        font-size: .7rem;
+    }
+    .fs-xs {
+        font-size: .8rem !important;
+    }
+}

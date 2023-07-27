@@ -1,0 +1,31 @@
+{% extends 'layout/front.html' %}
+{% load static %}
+
+{% block title %}
+{{ app.app_name }} - Akun
+{% endblock title %}
+
+{% block content %}
+<section id="akun">
+    <div class="container">
+        <div class="row header mr-0 ml-0 align-items-center bg-white rounded-xl p-4">
+            <div class="col-md-12 mb-3 user-icon">
+                <lottie-player src="https://assets10.lottiefiles.com/private_files/lf30_XAX6ye.json" background="transparent"
+                speed="1" style="width: 150px;" class="rounded-circle overflow-hidden" loop autoplay></lottie-player>
+            </div>
+            <div class="col-md-12">
+                <small class="text-muted kode">@{{ voter.auth }}</small>
+                <h5 class="text-ungu nama font-weight-bold mt-2">{{ voter.name }}</h5>
+                <h6 class="divisi font-weight-bold text-muted">{{ voter.division }}</h6>
+            </div>
+            <div class="col-md-6 offset-md-3">
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'voter-logout' %}" class="btn btn-danger btn-block rounded-pill mt-2"><i class="uil uil-sign-in-alt mr-2"></i>Logout</a>
+                {% else %}
+                <button data-toggle="modal" data-target="#modalLogin" class="btn btn-ungu btn-block rounded-pill mt-2"><i class="uil uil-sign-out-alt mr-2"></i>Login</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
